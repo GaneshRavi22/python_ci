@@ -18,13 +18,13 @@ pipeline {
         stage('Build environment') {
             steps {
                 sh '''conda env create -f environment.yml
-                      source activate case2
+                      conda activate case2
                     '''
             }
         }
         stage('Test environment') {
             steps {
-                sh '''source activate case2
+                sh '''conda activate case2
                       python test/test.py
                     '''
 				junit 'test_results1.xml'
@@ -43,8 +43,7 @@ pipeline {
     }
     post {
         always {
-            sh '''source deactivate
-				  conda remove --yes -n case2 --all --yes'''
+            sh 'conda remove --yes -n case2 --all --yes'
         }
     }
 }

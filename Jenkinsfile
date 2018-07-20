@@ -18,13 +18,13 @@ pipeline {
         stage('Build environment') {
             steps {
                 sh '''conda env create -f environment.yml
-                      conda activate case2
+                      source activate case2
                     '''
             }
         }
         stage('Test environment') {
             steps {
-                sh '''conda activate case2
+                sh '''source activate case2
                       python test/test.py
                     '''
 				junit 'test_results1.xml'
